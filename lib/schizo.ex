@@ -1,9 +1,23 @@
 defmodule Schizo do
+  @moduledoc """
+    A nice module that lets you upcase or unvowel from every other word in a sentence
+  """
 
+  @doc """
+    Uppercase every other word in a sentence, Example:
+    iex> Schizo.uppercase("you are awesome")
+    "you ARE AWESOME"
+  """
   def uppercase(string) do
     transformer(string, &upcaser/1)
   end
 
+  @doc """
+    Removes vowels from every other word in a sentence. Example:
+
+    iex> Schizo.unvowel("you are silly")
+    "you r slly"
+  """
   def unvowel(string) do
     transformer(string, &unvoweler/1)
   end
