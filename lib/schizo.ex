@@ -16,17 +16,18 @@ defmodule Schizo do
       |> Enum.join(" ")
   end
 
-  defp upcaser({word, index}) do
-    case {word, index} do
-      {word, 0} -> word
-      _ -> String.upcase(word)
-    end
+  defp upcaser(input) do
+    transform(input, &String.upcase/1)
   end
 
-  defp unvoweler({word, index}) do
+  defp unvoweler(input) do
+    transform(input, fn (word) -> Regex.replace(~r/[aeiou]/, word, "")  end)
+  end
+
+  defp transform({word, index}, transformation) do
     case {word, index} do
       {word, 0} -> word
-      _         -> Regex.replace(~r/[aeiou]/, word, "")
+      _         -> transformation.(word)
     end
   end
 end
